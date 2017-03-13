@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+  <head>
+    <title></title>
+    <style src="public/style/buttons.css">
+        
+    </style>
+  </head>
+  <body>
+    <div>
+        下载链接:<input type="button" value="复制下载链接" onclick="copyUrl()"/>
+        <br/>
+        <div style="width:450px;height:350px;word-wrap: break-word;">
+            <span id="downloadUrl"></span>
+        </div>
+    </div>
+  </body>
+  <script>
+    const clipboard = require('electron').clipboard;
+      require('electron').ipcRenderer.on('ping', function(event, message) {
+        document.querySelector('#downloadUrl').innerHTML=message.url;
+      });
+      function copyUrl(){
+        clipboard.writeText(document.querySelector('#downloadUrl').innerHTML);
+        alert('复制成功')
+      }
+  </script>
+</html>
